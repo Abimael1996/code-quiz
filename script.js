@@ -7,6 +7,7 @@ var timeLeft = 75;
 var timeInterval;
 
 function startTimer() {
+    viewsScores.remove();
     time.textContent = timeLeft;
     timeInterval = setInterval(function() {
         if (timeLeft > 0) {
@@ -411,14 +412,19 @@ startQuizBtn.addEventListener("click", question1);
 
 var viewsScores = document.querySelector("#viewHighscores");
 
+
 viewsScores.addEventListener("click", function() {
 
     content.children[0].remove();
     
     startQuizBtn.remove();
 
-    h1El.textContent = "Highscores";
+    viewsScores.remove();
 
+    document.body.children[0].remove();
+
+
+    h1El.textContent = "Highscores";
 
     var scoresList2 = document.createElement("ul");
     

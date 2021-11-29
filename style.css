@@ -4,6 +4,11 @@ header {
     margin: 10px;
 }
 
+header #time {
+    position: relative;
+    left: 1360px;
+}
+
 main {
     display: flex;
     flex-direction: column;
