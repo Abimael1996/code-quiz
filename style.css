@@ -68,14 +68,32 @@ li {
     padding: 10px;
 }
 
+#content {
+    text-align: start;
+    align-self: flex-start;
+    padding-left: 0;
+    width: 100%;
+}
+
 @media screen and (max-width: 858px) {
 
     main {
-        margin: 5%;
+        margin: 50% 5%;
     }
 
     h1 {
         font-size: 1.4em;
     }
+
+    #content {
+        width: fit-content;
+        align-self: center;
+
+    }
+
+
+.options {
+    margin-bottom: 10px;
+}
     
 }

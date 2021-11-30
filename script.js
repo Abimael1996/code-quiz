@@ -56,7 +56,7 @@ function presentQuestion() {
 
     content.children[0].remove();
     startQuizBtn.remove();
-    content.setAttribute("style", "text-align: start; align-self: start; padding-left: 0; width: 100%");
+    content.setAttribute("id", "content");
 
     content.appendChild(option1);
     content.appendChild(option2);
