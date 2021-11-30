@@ -225,6 +225,11 @@ function displayScores() {
 
     clearInterval(timeInterval);
 
+    document.body.children[0].remove();
+
+    var header = document.createElement("div");
+    document.body.prepend(header);
+    header.appendChild(timeText);
     timeText.setAttribute("class", "time");
 
     h1El.textContent = "Highscores";
