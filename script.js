@@ -2,12 +2,17 @@ var time = document.querySelector("#timeLeft");
 
 var startQuizBtn = document.querySelector("#startQuiz");
 
+var viewHighscores = document.querySelector("#viewHighscores");
+
+var main = document.querySelector("#main")
+
 var timeLeft = 75;
 
 var timeInterval;
 
+var isQuizOver = false;
+
 function startTimer() {
-    viewsScores.remove();
     time.textContent = timeLeft;
     timeInterval = setInterval(function() {
         if (timeLeft > 0) {
@@ -22,30 +27,45 @@ function startTimer() {
 
 var h1El = document.querySelector("#h1El");
 
-var content = document.querySelector("#content");
+var content = document.querySelector(".content");
 
-var contentP = document.querySelector("#content").children[0];
+var option1 = document.createElement("button");
+var option2 = document.createElement("button");
+var option3 = document.createElement("button");
+var option4 = document.createElement("button");
 
-function question1() {
+var question = 0;
 
-    h1El.textContent = "Commonly used data types DO NOT indlucde:";
+var option = 0;
 
-    contentP.remove();
+var questions = ["Comonnly used data types DO NOT include:", 
+                 "The condition in an if / else statement is enclosed within___",
+                 "Arrays in JavaScript can be used to store___",
+                 "String values must be enclosed within___ when being assinged to variables",
+                 "A very useful tool used during development and debugging for printing content to the debugger is:"];
+
+var options = ["1. strings", "2. booleans", "3. alerts", "4. numbers",
+               "1. quotes", "2. curly brackets", "3. parenthesis", "4. square brackets",
+               "1. numbers and strings", "2. other arrays", "3. booleans", "4. all of the above",
+               "1. commas", "2. curly brackets", "3. quotes", "4. parenthesis",
+               "1. JavaScript", "2. terminal / bash", "3. for loops", "4. console.log"];
+
+function presentQuestion() {
+
+    h1El.textContent = questions[question];
+
+    content.children[0].remove();
     startQuizBtn.remove();
     content.setAttribute("style", "text-align: start; align-self: start; padding-left: 0; width: 100%");
-    
-    var option1 = document.createElement("button");
-    var option2 = document.createElement("button");
-    var option3 = document.createElement("button");
-    var option4 = document.createElement("button");
+
     content.appendChild(option1);
     content.appendChild(option2);
     content.appendChild(option3);
     content.appendChild(option4);
-    option1.textContent = "1. strings";
-    option2.textContent = "2. booleans";
-    option3.textContent = "3. alerts";
-    option4.textContent = "4. numbers";
+    option1.textContent = options[option];
+    option2.textContent = options[option + 1];
+    option3.textContent = options[option + 2];
+    option4.textContent = options[option + 3];
 
     for (var i = 0; i < content.children.length; i++) {
         content.children[i].setAttribute("style", "display: block");
@@ -53,402 +73,204 @@ function question1() {
 
     }
 
-    option1.addEventListener("click", wrongAnswer);
-    option2.addEventListener("click", wrongAnswer);
-    option3.addEventListener("click", correctAnswer);
-    option4.addEventListener("click", wrongAnswer);
+    option1.addEventListener("click", checkAnswer);
+    option2.addEventListener("click", checkAnswer);
+    option3.addEventListener("click", checkAnswer);
+    option4.addEventListener("click", checkAnswer);
 
-    option1.addEventListener("click", question2);
-    option2.addEventListener("click", question2);
-    option3.addEventListener("click", question2);
-    option4.addEventListener("click", question2);
-
-    option1.addEventListener("click", substractTime);
-    option2.addEventListener("click", substractTime);
-    option4.addEventListener("click", substractTime);
+    option1.addEventListener("click", changeQuestion);
+    option2.addEventListener("click", changeQuestion);
+    option3.addEventListener("click", changeQuestion);
+    option4.addEventListener("click", changeQuestion);
 
 }
 
-function question2() {
+function changeQuestion() {
 
-    h1El.textContent = "The condition in an if / else statement is enclosed within_____.";
+    question++;
+    h1El.textContent = questions[question];
 
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
-    
-    var option1 = document.createElement("button");
-    var option2 = document.createElement("button");
-    var option3 = document.createElement("button");
-    var option4 = document.createElement("button");
-    content.appendChild(option1);
-    content.appendChild(option2);
-    content.appendChild(option3);
-    content.appendChild(option4);
-    option1.textContent = "1. quotes";
-    option2.textContent = "2. curly brackets";
-    option3.textContent = "3. parenthesis";
-    option4.textContent = "4. square brackets";
+    option += 4;
 
-    for (var i = 0; i < content.children.length; i++) {
-        content.children[i].setAttribute("style", "display: block");
-        content.children[i].setAttribute("class", "options")
-
-    }
-
-    option1.addEventListener("click", wrongAnswer);
-    option2.addEventListener("click", wrongAnswer);
-    option3.addEventListener("click", correctAnswer);
-    option4.addEventListener("click", wrongAnswer);
-
-    option1.addEventListener("click", question3);
-    option2.addEventListener("click", question3);
-    option3.addEventListener("click", question3);
-    option4.addEventListener("click", question3);
-
-    option1.addEventListener("click", substractTime);
-    option2.addEventListener("click", substractTime);
-    option4.addEventListener("click", substractTime);
+    option1.textContent = options[option];
+    option2.textContent = options[option + 1];
+    option3.textContent = options[option + 2];
+    option4.textContent = options[option + 3];
 
 }
 
-function question3() {
+var result = document.createElement("div");
+document.body.children[1].appendChild(result);
 
-    h1El.textContent = "Arrays in JavaScript can be used to store_____.";
+function checkAnswer(event) {
+
+    var answer = event.target.textContent;
     
-    document.body.children[1].children[2].remove();
+    if (answer === options[2] || answer === options[6] || answer === options[11] || answer === options[14] || answer === options[19]) {
 
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
-    
-    var option1 = document.createElement("button");
-    var option2 = document.createElement("button");
-    var option3 = document.createElement("button");
-    var option4 = document.createElement("button");
-    content.appendChild(option1);
-    content.appendChild(option2);
-    content.appendChild(option4);
-    content.appendChild(option3);
-    option1.textContent = "1. numbers and strings";
-    option2.textContent = "2. other arrays";
-    option4.textContent = "3. booleans";
-    option3.textContent = "4. all of the above";
-
-    for (var i = 0; i < content.children.length; i++) {
-        content.children[i].setAttribute("style", "display: block");
-        content.children[i].setAttribute("class", "options")
-
-    }
-
-    option1.addEventListener("click", wrongAnswer);
-    option2.addEventListener("click", wrongAnswer);
-    option3.addEventListener("click", correctAnswer);
-    option4.addEventListener("click", wrongAnswer);
-
-    option1.addEventListener("click", question4);
-    option2.addEventListener("click", question4);
-    option3.addEventListener("click", question4);
-    option4.addEventListener("click", question4);
-
-    option1.addEventListener("click", substractTime);
-    option2.addEventListener("click", substractTime);
-    option4.addEventListener("click", substractTime);
-
-}
-
-function question4() {
-
-    h1El.textContent = "String values must be enclosed within _____ when being assigned to variables";
-    
-    document.body.children[1].children[2].remove();
-
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
-    
-    var option1 = document.createElement("button");
-    var option2 = document.createElement("button");
-    var option3 = document.createElement("button");
-    var option4 = document.createElement("button");
-    content.appendChild(option1);
-    content.appendChild(option2);
-    content.appendChild(option3);
-    content.appendChild(option4);
-    option1.textContent = "1. commas";
-    option2.textContent = "2. curly brackets";
-    option3.textContent = "3. quotes";
-    option4.textContent = "4. parenthesis";
-
-    for (var i = 0; i < content.children.length; i++) {
-        content.children[i].setAttribute("style", "display: block");
-        content.children[i].setAttribute("class", "options")
-
-    }
-
-    option1.addEventListener("click", wrongAnswer);
-    option2.addEventListener("click", wrongAnswer);
-    option3.addEventListener("click", correctAnswer);
-    option4.addEventListener("click", wrongAnswer);
-
-    option1.addEventListener("click", question5);
-    option2.addEventListener("click", question5);
-    option3.addEventListener("click", question5);
-    option4.addEventListener("click", question5);
-
-    option1.addEventListener("click", substractTime);
-    option2.addEventListener("click", substractTime);
-    option4.addEventListener("click", substractTime);
-
-}
-
-function question5() {
-
-    h1El.textContent = "A very useful tool used during development and debugging for printing content to the debugger is:";
-    
-    document.body.children[1].children[2].remove();
-
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
-    
-    var option1 = document.createElement("button");
-    var option2 = document.createElement("button");
-    var option3 = document.createElement("button");
-    var option4 = document.createElement("button");
-    content.appendChild(option1);
-    content.appendChild(option2);
-    content.appendChild(option4);
-    content.appendChild(option3);
-    option1.textContent = "1. JavScript";
-    option2.textContent = "2. terminal / bash";
-    option4.textContent = "3. for loops";
-    option3.textContent = "4. console.log";
-
-    for (var i = 0; i < content.children.length; i++) {
-        content.children[i].setAttribute("style", "display: block");
-        content.children[i].setAttribute("class", "options")
-
-    }
-
-    option1.addEventListener("click", wrongAnswer);
-    option2.addEventListener("click", wrongAnswer);
-    option3.addEventListener("click", correctAnswer);
-    option4.addEventListener("click", wrongAnswer);
-
-    option1.addEventListener("click", substractTime);
-    option2.addEventListener("click", substractTime);
-    option4.addEventListener("click", substractTime);
-
-    option1.addEventListener("click", quizOver);
-    option2.addEventListener("click", quizOver);
-    option3.addEventListener("click", quizOver);
-    option4.addEventListener("click", quizOver);
-
-}
-
-function correctAnswer() {
-    
-    var result = document.createElement("div");
     result.textContent = "Correct!"
-    document.body.children[1].appendChild(result);
     result.setAttribute("class", "result");
-}
 
-function wrongAnswer() {
+    } else {
+        result.textContent = "Wrong!"
+        result.setAttribute("class", "result");
+        substractTime();
+    }
 
-    var result = document.createElement("div");
-    result.textContent = "Wrong!"
-    document.body.children[1].appendChild(result);
-    result.setAttribute("class", "result");
+    if (answer === options[16] || answer === options[17] || answer === options[18] || answer === options[19]) {
+        quizOver();
+    }
+
+    console.log(event.target.textContent);
 }
 
 function substractTime() {
 
+if (timeLeft >= 10) {
     timeLeft = timeLeft - 10;
     time.textContent = timeLeft;
 
+} else {
+    timeLeft = 0;
+    time.textContent = timeLeft;
 }
 
-var inputInitials;
+}
 
+var finalScore = document.createElement("p");
+
+var form = document.createElement("form");
+
+var enterInitials = document.createElement("p");
+enterInitials.textContent = "Enter initials:";
+
+inputInitials = document.createElement("input");
+
+var submitBtn = document.createElement("button");
+submitBtn.textContent = "Submit";
+
+submitBtn.setAttribute("class", "options");
+form.setAttribute("class", "form");
+enterInitials.setAttribute("class", "marginright");
+inputInitials.setAttribute("class", "marginright");
 
 function quizOver() {
 
     clearInterval(timeInterval);
 
+    isQuizOver = true;
+
     h1El.textContent = "All done!";
-    
-    document.body.children[1].children[2].remove();
 
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
-    content.children[0].remove();
+    option1.remove();
+    option2.remove();
+    option3.remove();
+    option4.remove();
 
-    var finalScore = document.createElement("p");
-    var form = document.createElement("form");
+    finalScore.textContent = "Your final score is " + timeLeft + ".";
     content.appendChild(finalScore);
     content.appendChild(form);
-    finalScore.textContent = "Your final score is " + timeLeft + ".";
 
-    var enterInitials = document.createElement("p");
     form.appendChild(enterInitials);
-    enterInitials.textContent = "Enter initials:";
 
-    inputInitials = document.createElement("input");
     form.appendChild(inputInitials);
 
-    var submitBtn = document.createElement("button");
     form.appendChild(submitBtn);
-    submitBtn.textContent = "Submit";
-    submitBtn.setAttribute("class", "options");
-
-    form.setAttribute("class", "form");
-    enterInitials.setAttribute("class", "marginright");
-    inputInitials.setAttribute("class", "marginright");
 
     submitBtn.addEventListener("click", saveInitialsAndScore);
+    submitBtn.addEventListener("click", displayScores);
+
 }
 
-var goBackBtn;
-var clearHighscoreBtn;
-var scoreObject;
-var scoreLi;
-var scoresList;
+var scores;
 
 function saveInitialsAndScore(event) {
-
+    
     event.preventDefault();
 
-    h1El.textContent = "Highscores";
-
-    document.body.children[1].children[2].remove();
-    document.body.children[0].remove();
-
-    content.children[0].remove();
-    content.children[0].remove();
-
-    scoreObject = {
-
-        Initials: inputInitials.value,
-        Score: timeLeft,
+    scores = {
+        
+        score: timeLeft,
+        initials: inputInitials.value
     }
 
-    displayScores();
-
-    goBackBtn = document.createElement("button");
-    content.appendChild(goBackBtn);
-    goBackBtn.textContent = "Go Back";
-    goBackBtn.setAttribute("class", "options");
-    goBackBtn.setAttribute("id", "margin");
-
-
-    clearHighscoreBtn = document.createElement("button");
-    content.appendChild(clearHighscoreBtn);
-    clearHighscoreBtn.textContent = "Clear Highscore";
-    clearHighscoreBtn.setAttribute("class", "options");
-    clearHighscoreBtn.setAttribute("id", "margin");
-
-    goBackBtn.addEventListener("click", goBack);
-    clearHighscoreBtn.addEventListener("click", clearHighscore);
+    localStorage.setItem("scores", JSON.stringify(scores));
 
 }
 
-var scoresList;
-var oldScore;
-oldScore = JSON.parse(localStorage.getItem("Score"))
+var timeText = document.querySelector("#time");
+
+var content2 = document.createElement("div");
+content2.setAttribute("class", "content");
+
+var scoresList = document.createElement("ul");
+content2.appendChild(scoresList);
+
+var scoreLi = document.createElement("li");
+
+var oldScore = JSON.parse(localStorage.getItem("scores"));
+
+var goBackBtn = document.createElement("button");
+goBackBtn.textContent = "Go Back";
+goBackBtn.setAttribute("class", "options");
+goBackBtn.setAttribute("id", "margin");
+
+var clearScoreBtn = document.createElement("button");
+clearScoreBtn.textContent = "Clear Highscore";
+clearScoreBtn.setAttribute("class", "options");
+clearScoreBtn.setAttribute("id", "margin");
+
 
 function displayScores() {
 
-    scoresList = document.createElement("ul");
-    content.appendChild(scoresList);
-    scoreLi = document.createElement("li");
+    clearInterval(timeInterval);
+
+    timeText.setAttribute("class", "time");
+
+    h1El.textContent = "Highscores";
+
+    content.remove();
+    startQuizBtn.remove();
+    result.remove();
+    viewHighscores.remove();
+
+if (isQuizOver === true) {
+
+    main.appendChild(content2);
     scoresList.appendChild(scoreLi);
     scoreLi.textContent = "New Score: " + inputInitials.value + " - " + timeLeft;
-    
+}
 
     if (oldScore !=null) {
+        main.appendChild(content2);
         var scoreLi2 = document.createElement("li");
-        scoreLi2.textContent = "Previous Score: " + oldScore.Initials + " - " + oldScore.Score;
+        scoreLi2.textContent = "Previous Score: " + oldScore.initials + " - " + oldScore.score;
         scoresList.appendChild(scoreLi2);
 
     }
 
-    storeScores();
+    content2.appendChild(goBackBtn);
+    content2.appendChild(clearScoreBtn);
+    
+    goBackBtn.addEventListener("click", goBack);
+    clearScoreBtn.addEventListener("click", clearScore);
 
 }
 
 function goBack() {
 
     window.location.href = "index.html";
+
 }
 
-
-function clearHighscore() {
+function clearScore() {
 
     scoresList.remove();
 
 }
 
-function storeScores() {
-
-    localStorage.setItem("Score", JSON.stringify(scoreObject));
-
-}
-
-function viewHighscores() {
-
-  
-
-}
-
+viewHighscores.addEventListener("click", displayScores);
 startQuizBtn.addEventListener("click", startTimer);
-startQuizBtn.addEventListener("click", question1);
-
-var viewsScores = document.querySelector("#viewHighscores");
+startQuizBtn.addEventListener("click", presentQuestion);
 
 
-viewsScores.addEventListener("click", function() {
-
-    content.children[0].remove();
-    
-    startQuizBtn.remove();
-
-    viewsScores.remove();
-
-    document.body.children[0].remove();
-
-
-    h1El.textContent = "Highscores";
-
-    var scoresList2 = document.createElement("ul");
-    
-    content.appendChild(scoresList2);
-
-    if (oldScore !=null) {
-        var scoreLi3 = document.createElement("li");
-        scoreLi3.textContent = "Previous Score: " + oldScore.Initials + " - " + oldScore.Score;
-        scoresList2.appendChild(scoreLi3);
-
-    } else {
-        var scoreLi3 = document.createElement("li");
-        scoreLi3.textContent = "No Scores Yet";
-        scoresList2.appendChild(scoreLi3);
-    }
-
-    goBackBtn = document.createElement("button");
-    content.appendChild(goBackBtn);
-    goBackBtn.textContent = "Go Back";
-    goBackBtn.setAttribute("class", "options");
-    goBackBtn.setAttribute("id", "margin");
-
-    goBackBtn.addEventListener("click", goBack);
-
-
-}
-)
