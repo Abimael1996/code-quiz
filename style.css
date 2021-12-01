@@ -87,6 +87,12 @@ li {
         font-size: 1.4em;
     }
 
+    .content {
+
+        padding-top: 5px;
+
+    }
+
     #content {
         width: fit-content;
         align-self: center;
@@ -104,6 +110,13 @@ li {
 
     main {
         margin: 20% 5%;
+    }
+
+
+    .content {
+
+        padding: 25px;
+
     }
 
     .options {
