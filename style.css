@@ -105,5 +105,10 @@ li {
     main {
         margin: 20% 5%;
     }
+
+    .options {
+        margin-bottom: 20px;
+    }
+        
     
 }
